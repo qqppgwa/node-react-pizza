@@ -10,21 +10,30 @@ var mysql = require("mysql");
 // console.log(mysql)
 var app = express();
 
-var con = mysql.createConnection({
-  host: "us-cdbr-iron-east-05.cleardb.net",
-  user: "b4691cf11c462d",
-  password: "76c6ca09",
-  database: "heroku_e1f59cb6f92f50c"
-});
-// console.log(con)
-con.connect(function (err) {
-  if (err) {
-    console.log('connecting error');
-    return;
-  }
-  console.log('connecting success');
-});
+function handleErr() {
+  var con = mysql.createConnection({
+    host: "us-cdbr-iron-east-05.cleardb.net",
+    user: "b4691cf11c462d",
+    password: "76c6ca09",
+    database: "heroku_e1f59cb6f92f50c"
+  });
 
+
+  // console.log(con)
+  con.connect(function (err) {
+    if (err) {
+      console.log('connecting error');
+      setTimeout(handleErr, 2000)
+      return;
+    }
+    console.log('connecting success');
+  });
+  app.use(function (req, res, next) {
+    req.con = con;
+    next();
+  });
+}
+handleErr()
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -38,10 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(function (req, res, next) {
-  req.con = con;
-  next();
-});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
