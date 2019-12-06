@@ -6,8 +6,24 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var mysql = require("mysql");
+// console.log(mysql)
 var app = express();
+
+var con = mysql.createConnection({
+  host: "us-cdbr-iron-east-05.cleardb.net",
+  user: "b4691cf11c462d",
+  password: "76c6ca09",
+  database: "heroku_e1f59cb6f92f50c"
+});
+// console.log(con)
+con.connect(function (err) {
+  if (err) {
+    console.log('connecting error');
+    return;
+  }
+  console.log('connecting success');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -15,20 +31,27 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(function (req, res, next) {
+  req.con = con;
+  next();
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -37,5 +60,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+var port = process.env.PORT || 3000;
+app.listen(port);
 module.exports = app;
