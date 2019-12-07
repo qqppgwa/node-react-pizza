@@ -21,7 +21,7 @@ function handleErr() {
   con = mysql.createConnection(dbinfo)
 
   console.log(con)
-  con.connect(function(err) {
+  con.connect(function (err) {
     if (err) {
       console.log('connecting error')
       setTimeout(handleErr, 2000)
@@ -29,7 +29,7 @@ function handleErr() {
     }
     console.log('connecting success')
   })
-  con.on('error', function(err) {
+  con.on('error', function (err) {
     console.log('db error', err)
     // 如果是连接断开，自动重新连接
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
@@ -40,7 +40,7 @@ function handleErr() {
   })
 }
 handleErr()
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   req.con = con
   next()
 })
@@ -56,18 +56,20 @@ app.use(
   })
 )
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
-
+app.use(express.static(path.join(__dirname, 'react-ui/build')))
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'react-ui/build', 'index.html'));
+// });
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404))
 })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
@@ -76,6 +78,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
 var port = process.env.PORT || 3000
 app.listen(port)
 module.exports = app
