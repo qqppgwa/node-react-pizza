@@ -68,9 +68,9 @@ if (process.env.NODE_ENV === 'production') {
   // app.get('*', function (req, res) {
   //   res.sendFile(path.join(__dirname, 'react-ui/build', 'index.html'));
   // });
-  app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+  app.use(express.static(path.resolve(__dirname, './react-ui/build')));
   app.get('*', function (request, response) {
-    response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+    response.sendFile(path.resolve(__dirname, './react-ui/build', 'index.html'));
   });
 }
 app.use('/', indexRouter)
