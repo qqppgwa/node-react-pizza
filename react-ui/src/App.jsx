@@ -29,7 +29,7 @@ const App = () => {
   //   setIsFetching(true)
   //   fetchData()
   // }, [fetchData])
-  console.log(message)
+  // console.log(message)
   return (
     <HashRouter>
       <nav>
