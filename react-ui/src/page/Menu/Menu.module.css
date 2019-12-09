@@ -1,0 +1,8 @@
+.board,
+.menuCon {
+    display: flex
+}
+
+.menuCon {
+    width: 100%
+}
