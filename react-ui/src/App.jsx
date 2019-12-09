@@ -8,27 +8,27 @@ const App = () => {
   const [message, setMessage] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
   const [url, setUrl] = useState('/getMenu')
-  const fetchData = useCallback(() => {
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`)
-        }
-        return response.json()
-      })
-      .then(json => {
-        setMessage(json.data[0])
-        setIsFetching(false)
-      })
-      .catch(e => {
-        setMessage(`API call failed: ${e}`)
-        setIsFetching(false)
-      })
-  }, [url])
-  useEffect(() => {
-    setIsFetching(true)
-    fetchData()
-  }, [fetchData])
+  // const fetchData = useCallback(() => {
+  //   fetch(url)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`status ${response.status}`)
+  //       }
+  //       return response.json()
+  //     })
+  //     .then(json => {
+  //       setMessage(json.data[0])
+  //       setIsFetching(false)
+  //     })
+  //     .catch(e => {
+  //       setMessage(`API call failed: ${e}`)
+  //       setIsFetching(false)
+  //     })
+  // }, [url])
+  // useEffect(() => {
+  //   setIsFetching(true)
+  //   fetchData()
+  // }, [fetchData])
   console.log(message)
   return (
     <HashRouter>
