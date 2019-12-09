@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/hi', function (req, res, next) {
+router.get('/getMenu', function (req, res, next) {
   var db = req.con;
   var data = "";
 
@@ -11,7 +11,6 @@ router.get('/hi', function (req, res, next) {
       // console.log('kk')
       console.log(err);
     }
-    console.log('jjjjjjjjjjjjjjjjjjj')
     var data = rows;
     console.log(data)
     res.set('Content-Type', 'application/json');
