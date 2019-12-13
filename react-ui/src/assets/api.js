@@ -9,4 +9,19 @@ export const getMenu = data => axios({
     url: '/getMenu',
     'Content-Type': 'application/json',
 });
+export const getCrust = data => axios({
+    method: 'get',
+    url: '/getCrust',
+    'Content-Type': 'application/json',
+});
+export const getSize = data => axios({
+    method: 'get',
+    url: '/getSize',
+    'Content-Type': 'application/json',
+});
+export const getTopping = data => axios({
+    method: 'get',
+    url: '/getTopping',
+    'Content-Type': 'application/json',
+});
 // export const apiImgId = data => getImg.get(`/gifs?api_key=${apiKey}&ids=${data.ids}`);
