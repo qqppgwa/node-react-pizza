@@ -24,4 +24,16 @@ export const getTopping = data => axios({
     url: '/getTopping',
     'Content-Type': 'application/json',
 });
+export const saveOrder = data => axios({
+    method: 'post',
+    url: '/saveOrder',
+    data: data,
+    'Content-Type': 'application/json',
+});
+export const getOrderList = data => axios({
+    method: 'get',
+    url: '/order/getOrderList',
+    data: data,
+    'Content-Type': 'application/json',
+});
 // export const apiImgId = data => getImg.get(`/gifs?api_key=${apiKey}&ids=${data.ids}`);

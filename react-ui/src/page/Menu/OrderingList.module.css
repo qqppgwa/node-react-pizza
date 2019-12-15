@@ -1,0 +1,17 @@
+aside.list {
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    background-color: #ccc;
+    padding: 10px
+}
+
+ul {
+    padding: 10px 0;
+    border-bottom: 1px solid #aaa
+}
+
+button {
+    display: block
+}

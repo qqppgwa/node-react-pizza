@@ -1,0 +1,32 @@
+ul.orderList {
+    padding: 0;
+    border-bottom: none;
+}
+
+ul.orderList li {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+
+    /* justify-content: center; */
+}
+
+ul.orderList:first-child {
+    font-weight: 900;
+}
+
+ul.orderList div:first-child {
+    width: 100px;
+}
+
+ul.orderList div:nth-child(2n) {
+    width: 60px;
+}
+
+ul.orderList div:nth-child(3) {
+    width: 100px;
+}
+
+/* li div:nth-child(3) {
+    width: 100px;
+} */

@@ -23,17 +23,17 @@ const reducers = (state = init, {
     type,
     payload
 }) => {
-    console.log(payload)
+    // console.log(payload)
     switch (type) {
         case 'Ordering':
-            console.log('2')
+            // console.log('2')
             return {
                 ...state,
                 ordering: payload.list
             }
 
             case 'MENU_INIT':
-                console.log(payload)
+                // console.log(payload)
                 return {
                     ...state,
                     isInit: payload.isInit,
@@ -56,7 +56,7 @@ export const menuInit = () => async dispatch => {
         let crust = await getCrust()
         let size = await getSize()
         let topping = await getTopping()
-        console.log(topping)
+        // console.log(topping)
         dispatch({
             type: 'MENU_INIT',
             payload: {

@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuCell from './MenuCell.jsx'
+import OrderingList from './OrderingList.jsx'
 import style from './Menu.module.css'
 import { getMenu } from '../../assets/api'
 import Calcubox from './CalcuBox.jsx'
@@ -15,10 +16,12 @@ class Menu extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     let content = []
     let showPop = this.state.showPop
-    let pop = showPop !== null ? <Calcubox data={this.props.pizza[showPop]} close={this.close.bind(this)} /> : null
+    let pop = showPop !== null ? <Calcubox data={this.props.pizza[showPop]} close={this.close.bind(this)} addOrder={this.addOrder} /> : null
+    console.log(this.props.ordering.length)
+    let orderList = this.props.ordering.length > 0 ? <OrderingList l={this.props.ordering.length} /> : null
     if (this.props.isInit) {
       for (let i = 0; i < this.props.pizza.length; i++) {
         // console.log(data.length)
@@ -35,6 +38,7 @@ class Menu extends React.Component {
       <div className={style.menuCon}>
         <div className={style.board}>{content}</div>
         {pop}
+        {orderList}
       </div>
     )
 
@@ -50,11 +54,23 @@ class Menu extends React.Component {
     // })
   }
   addItem(a) {
-    console.log(a)
+    // console.log(a)
     this.setState({ showPop: a })
   }
   close() {
     this.setState({ showPop: null })
+  }
+  addOrder = item => {
+    console.log(item)
+    let Item=item
+    Item.pizza=item.pizza.flavour
+
+    Item.topping=item.topping.length>0?item.topping.join(','):'none'
+    // console.log(i)
+    let arr = this.props.ordering
+    arr.push(Item)
+    // console.log(this.props.ordering)
+    this.props.orderIng(arr)
   }
 }
 // const Menu = props => {
@@ -80,6 +96,20 @@ const mapStateToProps = ({ ordering, isInit, pizza }) => {
     pizza: pizza
   }
 }
+const mapDispatchToProps = dispatch => {
+  //update
+  return {
+    orderIng: item => {
+      // console.log(item)
+      dispatch({
+        type: 'Ordering',
+        payload: {
+          list: item
+        }
+      }) //store.js裡的action
+    }
+  }
+}
 //
-export default connect(mapStateToProps, null)(Menu)
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)
 // export default Menu

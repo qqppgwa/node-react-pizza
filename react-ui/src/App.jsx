@@ -5,7 +5,7 @@ import EditMenu from './page/EditMenu/EditMenu.jsx'
 import { getMenu } from './assets/api'
 import { connect } from 'react-redux'
 import './App.css'
-import { HashRouter, Route, NavLink, Switch } from 'react-router-dom'
+import { HashRouter, Route, NavLink, Switch,Link } from 'react-router-dom'
 import { menuInit } from './store/index'
 class App extends React.Component {
   constructor(prpos) {
@@ -15,31 +15,33 @@ class App extends React.Component {
     return (
       <HashRouter>
         <nav>
-          <NavLink exact to={'/'}>
-            search
+          <NavLink exact to={'/menu'}>
+            Menu
           </NavLink>
           <NavLink exact to={'/order'}>
-            oder
+            Order
           </NavLink>
           <NavLink exact to={'/editMenu'}>
-            edit
+            Edit
           </NavLink>
+          
         </nav>
         <main>
           <Switch>
-            <Route path="/" component={Menu} />
-            <Route path="/order" component={Order} />
-            <Route path="/editMenu" component={EditMenu} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/order/" component={Order} />
+            <Route path="/editMenu/" component={EditMenu} />
+
           </Switch>
         </main>
       </HashRouter>
     )
   }
   componentDidMount() {
-    console.log(this.props.menuInit)
+    // console.log(this.props.menuInit)
     this.props.menuInit()
     // const getInit = () => dispatch => {
-    console.log('kkk')
+    // console.log('kkk')
     // getMenu().then(res => {
     //   this.props.menu({
     //     // type: 'menu',
@@ -162,51 +164,7 @@ class App extends React.Component {
 //     </HashRouter>
 //   )
 // }
-function App2() {
-  // const [message, setMessage] = useState(null)
-  // const [isFetching, setIsFetching] = useState(false)
-  // const [url, setUrl] = useState('/hi')
-  // const fetchData = useCallback(() => {
-  //   fetch(url)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error(`status ${response.status}`)
-  //       }
-  //       return response.json()
-  //     })
-  //     .then(json => {
-  //       setMessage(json.data[0].type)
-  //       setIsFetching(false)
-  //     })
-  //     .catch(e => {
-  //       setMessage(`API call failed: ${e}`)
-  //       setIsFetching(false)
-  //     })
-  // }, [url])
-  // useEffect(() => {
-  //   setIsFetching(true)
-  //   fetchData()
-  // }, [fetchData])
-  // console.log(message)
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code> src / App.js </code> and save to reload.{' '}
-  //       </p>{' '}
-  //       <p>
-  //         {' '}
-  //         {'« '} <strong> {isFetching ? 'Fetching message from API' : message} </strong> {' »'}{' '}
-  //       </p>{' '}
-  //       <p> </p>{' '}
-  //       <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-  //         Learn React{' '}
-  //       </a>{' '}
-  //     </header>{' '}
-  //   </div>
-  // )
-}
+
 
 const mapStateToProps = ({ ordering, menu }) => {
   return {

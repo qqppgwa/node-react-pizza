@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
 var indexRouter = require('./routes/index')
-var usersRouter = require('./routes/users')
+var orderRouter = require('./routes/order')
 var mysql = require('mysql')
 // console.log(mysql)
 var app = express()
@@ -20,7 +20,7 @@ var con
 function handleErr() {
   con = mysql.createConnection(dbinfo)
 
-  console.log(con)
+  // console.log(con)
   con.connect(function (err) {
     if (err) {
       console.log('connecting error')
@@ -59,7 +59,7 @@ app.use(cookieParser())
 // app.get('/*', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'react-ui/build', 'index.html'));
 // });
-console.log(__dirname)
+// console.log(__dirname)
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
 
@@ -74,7 +74,7 @@ if (process.env.NODE_ENV === 'production') {
   // });
 }
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
+app.use('/order', orderRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

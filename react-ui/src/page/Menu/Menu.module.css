@@ -1,9 +1,14 @@
 .board,
 .menuCon {
-    display: flex
+    display: flex;
+    width: calc(100% - 220px);
 }
 
 .menuCon {
     width: 100%;
     position: relative;
+}
+
+p {
+    padding: 20px
 }
